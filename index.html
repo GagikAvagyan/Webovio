@@ -1,259 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="./js/jquery-3.4.1.min.js" ></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>Webovio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX to WordPress Converter</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; height: 200px; margin-bottom: 10px; }
+        button { padding: 10px; cursor: pointer; }
+        pre { background: #f4f4f4; padding: 10px; white-space: pre-wrap; word-wrap: break-word; }
+    </style>
+    <!-- Include MathJax script -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
 </head>
-
 <body>
+    <h2>Convert Overleaf LaTeX to WordPress</h2>
+    <textarea id="input" placeholder="Paste LaTeX from Overleaf here..."></textarea>
+    <button onclick="convertLatex()">Convert</button>
+    <h3>Converted Output:</h3>
+    <pre id="output"></pre>
+    
+    <script>
+        function convertLatex() {
+            let latex = document.getElementById("input").value;
 
-<header>
-    <div class="hero">
-        <div class="nav">
-            <div class="logo">
-                <img src="./images/Logo.png" alt="">
-            </div>
-            <div class="nav_icon" id="NavOpen">
-            </div>
-            <div class="nav_menu">
-                <ul>
-                    <li>About</li>
-                    <li>Blog</li>
-                    <li>Contact</li>
-                    <li>Jobs</li>
-                </ul>
-            </div>
-        </div>
+            // Remove document structure
+            latex = latex.replace(/\\documentclass\{.*?\}|\\usepackage\{.*?\}|\\begin\{document\}|\\end\{document\}|\\title\{.*?\}|\\author\{.*?\}|\\date\{.*?\}|\\maketitle/g, "");
 
-        <div class="text_blocl">
-            <p>A place where </p>
-            <h1>A creative agency for redemptive brands</h1>
-            <span>Anteelo is a leading strategic design firm that builds powerful digital solutions for startups and enterprises.</span>
-        </div>
-    </div>
-</header>
+            // Replace \[ ... \] with $$ ... $$ for display mode
+            latex = latex.replace(/\\\[/g, "$$$$");
+            latex = latex.replace(/\\\]/g, "$$$$");
 
-<div class="logos_block">
-    <img src="./images/Logo1.png" alt="">
-    <img src="./images/Logo2.png" alt="">
-    <img src="./images/Logo3.png" alt="">
-    <img src="./images/Logo4.png" alt="">
-    <img src="./images/Logo5.png" alt="">
-</div>
+            // Add [latex] and [/latex] tags
+            latex = "[latex]\n" + latex.trim() + "\n[/latex]";
 
-<div class="Strategy">
-    <div class="Strategy_info">
-        <div class="Strategy_text">
-            <p>What we do for you</p>
-            <h2>Strategy. Design  Content. <span class="bg_color">Technology</span> Development </h2>
-            <span>There’s no secret sauce, no wizard behind the curtain. What makes Aerolab
-                tick is an interdisciplinary team with a framework that fosters candid collaboration.</span>
-        </div>
-        <div class="comment">
-            <p class="text_contact">With More than 10 Years of Knowledge and Expertise we Design and
-                Code Websites and Apps, We Build Brands and Help Them Succeed</p>
-            <div>
-                <img src="./images/Oval.png" alt="">
-                <div class="author">
-                    <h5>Genevieve Rodriquez</h5>
-                    <p>Founder & CEO, Webovio</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+            // Insert LaTeX code into the output div
+            document.getElementById("output").textContent = latex;
 
-<div class="border_block"></div>
-
-<div class="project_title">
-    <div class="info_section">
-        <p class="first_item">
-            We Have Some Awesomr Project.
-        </p>
-        <p class="second_item">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        </p>
-    </div>
-</div>
-
-<div class="projects">
-    <div class="img_sections">
-        <div class="comment_prod">
-            <p class="comment_text">
-                “In my history of working with trade show vendors, I can honestly say that there is not one
-                company that I've ever worked with that has better service than Exhibit Systems.”
-            </p>
-            <div class="author">
-                <img src="./images/Oval1.png" alt="">
-                <div>
-                    <h5>Angel Armstrong</h5>
-                    <p>Founder & CEO, Google</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="text_sections">
-        <h2>
-            The wall new
-            Balenciaga.com
-        </h2>
-        <p>
-            This article is floated online with an aim to help you find the best dvd printing solution.
-            Dvd printing is an important feature used by large and small DVD production houses to print information on DVDs.
-        </p>
-    </div>
-</div>
-
-<div class="projects2 secont_product">
-    <div class="text_sections">
-        <h2>
-            Is this the future of
-            3D model?
-        </h2>
-        <p>
-            While it was just a TV show, that little speech at the beginning of the original Star Trek show really did do a good job of capturing our feelings about space.
-            <br> <br>
-            It is those feelings that drive our love of astronomy and our desire to learn more and more about it.
-        </p>
-    </div>
-
-    <div class="img_sections">
-        <div class="comment_prod">
-            <p class="comment_text">
-                “I know they are going to be honest with me. I am not going to get a subpar product; I know it
-                is going to be good. That is the number one advantage of working with Exhibit Systems.
-            </p>
-            <div class="author">
-                <img src="./images/Oval2.png" alt="">
-                <div>
-                    <h5>Lina Hart</h5>
-                    <p>Founder & CEO, Jico</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="projects3 secont_product">
-    <div class="img_sections">
-        <div class="comment_prod">
-            <p class="comment_text">
-                “Exhibit Systems is not a provider. They are not a supplier. They are a partner with expertise in making trade shows effective.”
-            </p>
-            <div class="author">
-                <img src="./images/Oval3.png" alt="">
-                <div>
-                    <h5>Eunice Oliver</h5>
-                    <p>Founder & CEO, Zeem</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="text_sections">
-        <h2>
-            Is this the future of
-            Online Booking
-        </h2>
-        <p>
-            You should be able to find several indispensable facts about motivation in the following paragraphs.
-            <br>
-            <br>
-            If there’s at least one fact you didn’t know before, imagine the difference it might make.
-        </p>
-    </div>
-</div>
-
-<div class="border_block"></div>
-
-<div class="Product_Idea">
-    <h2>
-        Deation & Evaluation - Best Way to Kick off Your Product Idea
-    </h2>
-    <div class="Product_Idea_info">
-        <div>
-            <h3>Product Design Sprint</h3>
-            <p>A five-day workshop that will help you answer crucial business questions</p>
-        </div>
-        <div>
-            <h3>Scoping <br> Session</h3>
-            <p>A workshop aimed at shaping your business idea, answering questions regarding project planning</p>
-        </div>
-        <div>
-            <h3>UX <br> Review</h3>
-            <p>An evaluation which will help you radically improve your product.</p>
-        </div>
-        <div>
-            <h3>Code <br> Review</h3>
-            <p>Do you know what one of the key secrets of success is what makes people successful in business</p>
-        </div>
-    </div>
-</div>
-
-<footer>
-    <div class="lets_make">
-        <h2>Let’s make something amazing together.</h2>
-    </div>
-    <div class="phone_address">
-        <div class="phone">
-            <span>Phone</span>
-            <p>+32 50 31 28 32</p>
-        </div>
-        <div class="address">
-            <span>Address</span>
-            <p>491 Merlin Crest Suite 963</p>
-        </div>
-    </div>
-    <div class="border_block"></div>
-
-    <div class="footer_info">
-        <ul>
-            <li>Services</li>
-            <li>Strategy Design</li>
-            <li>Product Design</li>
-            <li>Content Strategy</li>
-            <li>Brand Strategy</li>
-            <li>Development</li>
-        </ul>
-        <ul>
-            <li>Help And Advice</li>
-            <li>How it works</li>
-            <li>Contact Support</li>
-            <li>Privacy Policy</li>
-            <li>FAQ</li>
-        </ul>
-        <ul>
-            <li>Company</li>
-            <li>About</li>
-            <li>Blog</li>
-            <li>Contact</li>
-            <li>Jobs</li>
-        </ul>
-        <div>
-            <p>Get in Touch</p>
-            <span>Feel free to get in touch with us vai email</span>
-            <h3 class="info_mail">info.webovio@gmail.com</h3>
-            <div class="circle">
-                <span class="span"></span>
-                <span class="span"></span>
-                <span class="span"></span>
-                <span class="span"></span>
-            </div>
-        </div>
-    </div>
-    <div class="border_block"></div>
-
-    <div class="footer_bottom">
-        <img src="./images/Logo_footer.png" alt="">
-        <p>© 2020@webovio. All Rights Reserved.</p>
-    </div>
-</footer>
-
-<script src="./js/script.js"></script>
+            // Trigger MathJax to process and render the LaTeX
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "output"]);
+        }
+    </script>
 </body>
 </html>
